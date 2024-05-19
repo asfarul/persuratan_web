@@ -57,8 +57,8 @@ class SlideshowsController extends Controller
                 })
                 ->addColumn('kategori', function ($item) {
                     // dd($item->user->pegawai);
-                    $kategori = 'PERSURATAN WEB';
-                    if ($item->is_syariah) $kategori = 'PERSURATAN WEB SYARIAH';
+                    $kategori = 'BANK KALBAR';
+                    if ($item->is_syariah) $kategori = 'BANK KALBAR SYARIAH';
                     return $kategori;
                 })
                 ->addColumn('action', function ($item) {

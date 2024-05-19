@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Data Slideshow')
-@section('page_title', 'Data Slideshow')
+@section('title', 'Kepala Surat')
+@section('page_title', 'Kepala Surat')
 @push('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
@@ -11,15 +11,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Smart TV</li>
-    <!--end::Item-->
-    <!--begin::Item-->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-    </li>
-    <!--end::Item-->
-    <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Slideshow</li>
+    <li class="breadcrumb-item text-muted">Kepala Surat</li>
     <!--end::Item-->
 @endpush
 @section('content')
@@ -56,13 +48,6 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                            <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
-                                data-kt-menu-placement="bottom-end">
-                                <i class="ki-duotone ki-filter fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>Filter</button>
                             <!--begin::Menu 1-->
                             <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
                                 <!--begin::Header-->
@@ -102,7 +87,7 @@
                             <!--end::Menu 1-->
                             <!--end::Filter-->
                             <!--begin::Add user-->
-                            <a class="btn btn-primary" href="{{ route('dashboard.slideshows.create') }}">
+                            <a class="btn btn-primary" href="{{ route('dashboard.kepalasurat.create') }}">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -139,11 +124,10 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="dataTable">
                         <thead>
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">Judul</th>
-                                <th>File</th>
-                                <th>Type</th>
-                                <th>Kategori</th>
-                                <th>Status</th>
+                                <th class="min-w-125px">Nama Kop</th>
+                                <th>Alamat Kop</th>
+                                <th>Nama Tujuan</th>
+                                <th>Pembuat</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
                         </thead>
@@ -161,9 +145,6 @@
 @endsection
 @push('scripts')
     <script>
-        var status = document.getElementById('status');
-        var statusFilter = status.value;
-
         var dataTable = $('#dataTable').DataTable({
             searchDelay: 500,
             processing: true,
@@ -176,28 +157,24 @@
                 className: "row-selected",
             },
             ajax: {
-                url: "{!! route('dashboard.slideshows.index') !!}",
+                url: "{!! route('dashboard.kepalasurat.index') !!}",
                 data: function(data) {
-                    if (statusFilter != '' || statusFilter != null) {
-                        data.status = statusFilter;
-                    }
+
                 }
             },
             columns: [{
-                    data: "judul"
+                    data: "nama_kop"
                 },
                 {
-                    data: "file"
+                    data: "alamat_kop"
                 },
                 {
-                    data: "tipe"
+                    data: "nama_tujuan"
                 },
                 {
-                    data: "kategori"
+                    data: "pembuat"
                 },
-                {
-                    data: "status"
-                },
+
                 {
                     data: 'action',
                     orderable: false,
@@ -216,22 +193,8 @@
             // },
         });
 
-        // Handle category filter change
-        $('#status').on('change', function() {
-            statusFilter = $(this).val();
-        });
 
-        // Handle apply filter button click
-        $('#apply-filter').on('click', function() {
-            dataTable.ajax.reload();
-        });
 
-        $('#reset-filter').on('click', function() {
-            statusFilter = null;
-            $('#status').val('').trigger('change');
-            dataTable.ajax.reload();
-
-        });
 
         const filterSearch = document.querySelector(
             '[data-kt-docs-table-filter="search"]'
@@ -244,7 +207,7 @@
         // Handle delete button click
         dataTable.on('click', '.btn-delete', function() {
             var id = $(this).data('id');
-            var url = '{!! route('dashboard.slideshows.destroy', ':id') !!}';
+            var url = '{!! route('dashboard.kepalasurat.destroy', ':id') !!}';
             url = url.replace(':id', id);
             $('#deleteForm').attr('action', url);
             Swal.fire({

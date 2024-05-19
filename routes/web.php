@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\CabangController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\JabatanController;
+use App\Http\Controllers\Dashboard\KepalaSuratController;
 use App\Http\Controllers\Dashboard\PermissionsController;
 use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Dashboard\SlideshowsController;
@@ -50,12 +51,14 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'dashboard', 'as
     Route::get('profile/{nip}', [UsersController::class, 'userProfile'])->name('profile.index');
     Route::resource('users', UsersController::class);
 
+
+
     // Route::post('master/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update');
     // Route::delete('master/jabatan/bulk-delete', [JabatanController::class, 'bulkDelete'])->name('jabatan.bulkdelete');
     // Route::get('master/jabatan/json', [JabatanController::class, 'json'])->name('jabatan.json');
     // Route::resource('master/jabatan', JabatanController::class);
 
-    // Route::resource('slideshows', SlideshowsController::class);
+    Route::resource('kepalasurat', KepalaSuratController::class);
     // Route::resource('partners', PartnersController::class);
     // Route::resource('sukubunga', SukuBungaController::class);
     // Route::resource('settings', SettingsController::class);

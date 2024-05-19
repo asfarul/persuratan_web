@@ -1,23 +1,16 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Slideshow')
-@section('page_title', 'Edit Item Slideshow')
+@section('title', 'Kepala Surat')
+@section('page_title', 'Edit Item Kepala Surat')
 @push('breadcrumbs')
     <!--begin::Item-->
     <li class="breadcrumb-item">
         <span class="bullet bg-gray-400 w-5px h-2px"></span>
     </li>
     <!--end::Item-->
-    <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Smart TV</li>
-    <!--end::Item-->
-    <!--begin::Item-->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-    </li>
-    <!--end::Item-->
+
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('dashboard.slideshows.index') }}">Slideshow</a></li>
+            href="{{ route('dashboard.kepalasurat.index') }}">Kepala Surat</a></li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -39,7 +32,7 @@
                     data-bs-target="#kt_roles" aria-expanded="true" aria-controls="kt_roles">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Edit Slideshow</h3>
+                        <h3 class="fw-bold m-0">Edit Kepala Surat</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -71,9 +64,9 @@
                         </div>
                     @endif
                     <!--begin::Form-->
-                    <form id="kt_form" class="form" action="{{ route('dashboard.slideshows.update', $slideshow->id) }}"
-                        method="POST" data-kt-redirect-url="{{ route('dashboard.slideshows.index') }}"
-                        enctype="multipart/form-data">
+                    <form id="kt_form" class="form"
+                        action="{{ route('dashboard.kepalasurat.update', $kepalasurat->id) }}" method="POST"
+                        data-kt-redirect-url="{{ route('dashboard.kepalasurat.index') }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <!--begin::Card body-->
@@ -81,12 +74,13 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Kop</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="name" value="{{ old('name', $slideshow->judul) }}"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                    <input type="text" name="nama_kop"
+                                        value="{{ old('nama_kop', $kepalasurat->nama_kop) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_kop') ? 'is-invalid' : '' }}"
                                         placeholder="Masukkan nama" />
                                 </div>
                                 <!--end::Col-->
@@ -95,14 +89,14 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Deskripsi</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Alamat Kop</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="deskripsi"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan deskripsi"
-                                        value="{{ old('deskripsi', $slideshow->deskripsi) }}" />
+                                    <input type="text" name="alamat_kop"
+                                        value="{{ old('alamat_kop', $kepalasurat->alamat_kop) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('alamat_kop') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan alamat" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -110,81 +104,19 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Kategori
-                                </label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Tujuan</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <select name="is_syariah" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Status">
-                                        <option value=0 @if (old('is_active', $slideshow->is_syariah) == 0) selected @endif>
-                                            PERSURATAN WEB</option>
-                                        <option value=1 @if (old('is_active', $slideshow->is_syariah) == 1) selected @endif>
-                                            PERSURATAN WEB SYARIAH</option>
-                                    </select>
+                                    <input type="text" name="nama_tujuan"
+                                        value="{{ old('nama_tujuan', $kepalasurat->nama_tujuan) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_tujuan') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan nama tujuan" />
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Type
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <select name="type" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Type Slider">
-                                        <option value="gambar" @if (old('type', $slideshow->type) == 'gambar') selected @endif>
-                                            Gambar</option>
-                                        <option value="video" @if (old('type', $slideshow->type) == 'video') selected @endif>
-                                            Video</option>
-                                    </select>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                    File
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="file" class="form-control form-control-lg form-control-solid"
-                                        name="file" />
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Description-->
-                                <div class="text-muted fs-7 mb-7 mt-2">Max 200mb</div>
-                                <!--begin::Description-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Status
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <select name="is_active" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Status">
-                                        <option value=1 @if (old('is_active', $slideshow->is_active) == 1) selected @endif>
-                                            AKTIF</option>
-                                        <option value=0 @if (old('is_active', $slideshow->is_active) == 0) selected @endif>
-                                            NONAKTIF</option>
-                                    </select>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
+
                         </div>
                         <!--end::Card body-->
                         <!--begin::Actions-->
@@ -233,10 +165,24 @@
         var validator = FormValidation.formValidation(
             form, {
                 fields: {
-                    'name': {
+                    'nama_kop': {
                         validators: {
                             notEmpty: {
                                 message: 'Nama tidak boleh kosong'
+                            }
+                        }
+                    },
+                    'alamat_kop': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Alamat tidak boleh kosong'
+                            }
+                        }
+                    },
+                    'nama_tujuan': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Nama Tujuan tidak boleh kosong'
                             }
                         }
                     },

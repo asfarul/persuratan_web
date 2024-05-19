@@ -8,16 +8,8 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Smart TV</li>
-    <!--end::Item-->
-    <!--begin::Item-->
-    <li class="breadcrumb-item">
-        <span class="bullet bg-gray-400 w-5px h-2px"></span>
-    </li>
-    <!--end::Item-->
-    <!--begin::Item-->
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('dashboard.slideshows.index') }}">Slideshow</a></li>
+            href="{{ route('dashboard.kepalasurat.index') }}">Kepala Surat</a></li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -71,8 +63,8 @@
                         </div>
                     @endif
                     <!--begin::Form-->
-                    <form id="kt_form" class="form" action="{{ route('dashboard.slideshows.store') }}" method="POST"
-                        data-kt-redirect-url="{{ route('dashboard.slideshows.index') }}" enctype="multipart/form-data">
+                    <form id="kt_form" class="form" action="{{ route('dashboard.kepalasurat.store') }}" method="POST"
+                        data-kt-redirect-url="{{ route('dashboard.kepalasurat.index') }}" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -80,12 +72,12 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Kop</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="name"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                    <input type="text" name="nama_kop"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_kop') ? 'is-invalid' : '' }}"
                                         placeholder="Masukkan nama" />
                                 </div>
                                 <!--end::Col-->
@@ -94,91 +86,27 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Deskripsi</label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Alamat Kop</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="deskripsi"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('deskripsi') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan deskripsi" />
+                                    <input type="text" name="alamat_kop"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('alamat_kop') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Alamat Kop" />
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
+                             <!--begin::Input group-->
+                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Kategori
-                                </label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Nama Tujuan</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <select name="is_syariah" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Status">
-                                        <option value=0 selected>
-                                            PERSURATAN WEB</option>
-                                        <option value=true>
-                                            PERSURATAN WEB Syariah</option>
-                                    </select>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Type
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <select name="type" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Type Slider">
-                                        <option value="gambar" @if (old('type') == 'gambar') selected @endif>
-                                            Gambar</option>
-                                        <option value="video" @if (old('type') == 'video') selected @endif>
-                                            Video</option>
-                                    </select>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    File
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="file" class="form-control form-control-lg form-control-solid"
-                                        name="file" />
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Description-->
-                                <div class="text-muted fs-7 mb-7 mt-2">Max 200mb</div>
-                                <!--begin::Description-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
-                                    Status
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <select name="is_active" class="form-select" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Pilih Status">
-                                        <option value=1 selected>
-                                            AKTIF</option>
-                                        <option value=0>
-                                            NONAKTIF</option>
-                                    </select>
+                                    <input type="text" name="nama_tujuan"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_tujuan') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Nama Tujuan" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -232,17 +160,24 @@
         var validator = FormValidation.formValidation(
             form, {
                 fields: {
-                    'name': {
+                    'nama_kop': {
                         validators: {
                             notEmpty: {
                                 message: 'Nama tidak boleh kosong'
                             }
                         }
                     },
-                    'file': {
+                    'alamat_kop': {
                         validators: {
                             notEmpty: {
-                                message: 'File tidak boleh kosong'
+                                message: 'Alamat tidak boleh kosong'
+                            }
+                        }
+                    },
+                    'nama_tujuan': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Nama Tujuan tidak boleh kosong'
                             }
                         }
                     },
