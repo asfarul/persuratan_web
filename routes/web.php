@@ -51,27 +51,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'dashboard', 'as
     Route::get('profile/{nip}', [UsersController::class, 'userProfile'])->name('profile.index');
     Route::resource('users', UsersController::class);
 
-
-
-    // Route::post('master/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update');
-    // Route::delete('master/jabatan/bulk-delete', [JabatanController::class, 'bulkDelete'])->name('jabatan.bulkdelete');
-    // Route::get('master/jabatan/json', [JabatanController::class, 'json'])->name('jabatan.json');
-    // Route::resource('master/jabatan', JabatanController::class);
-
     Route::resource('kepalasurat', KepalaSuratController::class);
-    // Route::resource('partners', PartnersController::class);
-    // Route::resource('sukubunga', SukuBungaController::class);
-    // Route::resource('settings', SettingsController::class);
-    // Route::resource('cabang', CabangController::class);
 
-    // Route::resource('users', UsersController::class);
-    // Route::resource('roles', RolesController::class);
-    // Route::post('posts/attachment/upload/{id}', [PostsController::class, 'uploadAttachment'])->name('attachments.upload');
-    // Route::resource('posts', PostsController::class);
-    // Route::resource('mainmenu', MainMenuController::class);
-    // Route::resource('citizen', CitizenController::class);
-    // Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
-    // Route::delete('posts/attachment/{id}', [PostsController::class, 'deleteAttachment'])->name('attachments.delete');
 });
 
 // Route::get('/linkstorage', function () {
