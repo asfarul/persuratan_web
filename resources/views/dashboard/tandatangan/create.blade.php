@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Kepala Surat')
-@section('page_title', 'Tambah Item Kepala Surat')
+@section('title', 'Nama Tanda Tangan')
+@section('page_title', 'Tambah Item Nama Tanda Tangan')
 @push('breadcrumbs')
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -9,7 +9,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('dashboard.kepalasurat.index') }}">Kepala Surat</a></li>
+            href="{{ route('dashboard.tandatangan.index') }}">Nama Tanda Tangan</a></li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -63,8 +63,8 @@
                         </div>
                     @endif
                     <!--begin::Form-->
-                    <form id="kt_form" class="form" action="{{ route('dashboard.kepalasurat.store') }}" method="POST"
-                        data-kt-redirect-url="{{ route('dashboard.kepalasurat.index') }}" enctype="multipart/form-data">
+                    <form id="kt_form" class="form" action="{{ route('dashboard.tandatangan.store') }}" method="POST"
+                        data-kt-redirect-url="{{ route('dashboard.tandatangan.index') }}" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -72,12 +72,12 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Kop</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="nama_kop"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_kop') ? 'is-invalid' : '' }}"
+                                    <input type="text" name="nama"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama') ? 'is-invalid' : '' }}"
                                         placeholder="Masukkan nama" />
                                 </div>
                                 <!--end::Col-->
@@ -86,27 +86,27 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Alamat Kop</label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">NIP</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="alamat_kop"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('alamat_kop') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Alamat Kop" />
+                                    <input type="text" name="nip"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nip') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan NIP" />
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
+                             <!--begin::Input group-->
+                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Nama Tujuan</label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Jabatan</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="nama_tujuan"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_tujuan') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Nama Tujuan" />
+                                    <input type="text" name="jabatan"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('jabatan') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Jabatan" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -160,24 +160,24 @@
         var validator = FormValidation.formValidation(
             form, {
                 fields: {
-                    'nama_kop': {
+                    'nama': {
                         validators: {
                             notEmpty: {
                                 message: 'Nama tidak boleh kosong'
                             }
                         }
                     },
-                    'alamat_kop': {
+                    'nip': {
                         validators: {
                             notEmpty: {
-                                message: 'Alamat tidak boleh kosong'
+                                message: 'NIP tidak boleh kosong'
                             }
                         }
                     },
-                    'nama_tujuan': {
+                    'jabatan': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Tujuan tidak boleh kosong'
+                                message: 'Jabatan Tujuan tidak boleh kosong'
                             }
                         }
                     },

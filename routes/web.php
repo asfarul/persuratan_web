@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\SlideshowsController;
 use App\Http\Controllers\Dashboard\PartnersController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SukuBungaController;
+use App\Http\Controllers\Dashboard\TandaTanganController;
 use App\Http\Controllers\Dashboard\UsersController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'dashboard', 'as
     Route::resource('users', UsersController::class);
 
     Route::resource('kepalasurat', KepalaSuratController::class);
+    Route::resource('tandatangan', TandaTanganController::class);
 
 });
 

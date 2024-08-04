@@ -1,15 +1,16 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Kepala Surat')
-@section('page_title', 'Tambah Item Kepala Surat')
+@section('title', 'Nama Tanda Tangan')
+@section('page_title', 'Edit Item Nama Tanda Tangan')
 @push('breadcrumbs')
     <!--begin::Item-->
     <li class="breadcrumb-item">
         <span class="bullet bg-gray-400 w-5px h-2px"></span>
     </li>
     <!--end::Item-->
+
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('dashboard.kepalasurat.index') }}">Kepala Surat</a></li>
+            href="{{ route('dashboard.tandatangan.index') }}">Nama Tanda Tangan</a></li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -17,7 +18,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-muted">Tambah Item</li>
+    <li class="breadcrumb-item text-muted">Edit Item</li>
     <!--end::Item-->
 @endpush
 @section('content')
@@ -31,7 +32,7 @@
                     data-bs-target="#kt_roles" aria-expanded="true" aria-controls="kt_roles">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Tambah Item Baru</h3>
+                        <h3 class="fw-bold m-0">Edit Tanda Tangan</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -63,21 +64,23 @@
                         </div>
                     @endif
                     <!--begin::Form-->
-                    <form id="kt_form" class="form" action="{{ route('dashboard.kepalasurat.store') }}" method="POST"
-                        data-kt-redirect-url="{{ route('dashboard.kepalasurat.index') }}" enctype="multipart/form-data">
+                    <form id="kt_form" class="form"
+                        action="{{ route('dashboard.tandatangan.update', $data->id) }}" method="POST"
+                        data-kt-redirect-url="{{ route('dashboard.tandatangan.index') }}" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
-
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Kop</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="nama_kop"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_kop') ? 'is-invalid' : '' }}"
+                                    <input type="text" name="nama"
+                                        value="{{ old('nama', $data->nama) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama') ? 'is-invalid' : '' }}"
                                         placeholder="Masukkan nama" />
                                 </div>
                                 <!--end::Col-->
@@ -86,13 +89,14 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Alamat Kop</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">NIP</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="alamat_kop"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('alamat_kop') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Alamat Kop" />
+                                    <input type="text" name="nip"
+                                        value="{{ old('nip', $data->nip) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nip') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan NIP" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -100,17 +104,19 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Nama Tujuan</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Jabatan</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="nama_tujuan"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('nama_tujuan') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Nama Tujuan" />
+                                    <input type="text" name="jabatan"
+                                        value="{{ old('jabatan', $data->jabatan) }}"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('jabatan') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Jabatan" />
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
+
                         </div>
                         <!--end::Card body-->
                         <!--begin::Actions-->
@@ -142,7 +148,6 @@
 @endsection
 @push('scripts')
     {{-- <script src="{{ asset('assets/dashboard/') }}/js/sliders/list.js"></script> --}}
-    <script src="{{ asset('assets/metro1/') }}/js/roles/form.js"></script>
     <script>
         @if (Session::has('success'))
             toastr.success("{!! Session::get('success') !!}");
@@ -160,24 +165,24 @@
         var validator = FormValidation.formValidation(
             form, {
                 fields: {
-                    'nama_kop': {
+                    'nama': {
                         validators: {
                             notEmpty: {
                                 message: 'Nama tidak boleh kosong'
                             }
                         }
                     },
-                    'alamat_kop': {
+                    'nip': {
                         validators: {
                             notEmpty: {
-                                message: 'Alamat tidak boleh kosong'
+                                message: 'NIP tidak boleh kosong'
                             }
                         }
                     },
-                    'nama_tujuan': {
+                    'jabatan': {
                         validators: {
                             notEmpty: {
-                                message: 'Nama Tujuan tidak boleh kosong'
+                                message: 'Jabatan tidak boleh kosong'
                             }
                         }
                     },
