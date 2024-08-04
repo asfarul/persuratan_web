@@ -1,3 +1,5 @@
+![alt text](image.png)
+
 ## Persuratan Web
 Nama : Asfarul Haq
 NIM : 232220007
@@ -15,3 +17,11 @@ Kelas : 30
 nip : 001
 password : 123!@#123
 
+## Screenshots
+![alt text](image-5.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
