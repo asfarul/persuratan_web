@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\PartnersController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SukuBungaController;
 use App\Http\Controllers\Dashboard\SuratKeluarController;
+use App\Http\Controllers\Dashboard\SuratMasukController;
 use App\Http\Controllers\Dashboard\TandaTanganController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Models\SuratKeluar;
@@ -57,6 +58,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'dashboard', 'as
     Route::resource('kepalasurat', KepalaSuratController::class);
     Route::resource('tandatangan', TandaTanganController::class);
     Route::resource('suratkeluar', SuratKeluarController::class);
+    Route::resource('suratmasuk', SuratMasukController::class);
 
 });
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\KepalaSurat;
 use App\Models\SuratKeluar;
+use App\Models\TandaTangan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -51,7 +53,9 @@ class SuratKeluarController extends Controller
 
     public function create()
     {
-        return view($this->prefix . 'create');
+        $tandaTangan = TandaTangan::all();
+        $kopSurat = KepalaSurat::all();
+        return view($this->prefix . 'create', compact(['tandaTangan', 'kopSurat']));
     }
 
     /**

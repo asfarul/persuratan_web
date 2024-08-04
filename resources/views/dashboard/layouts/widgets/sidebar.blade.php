@@ -74,7 +74,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click"
-                        class="menu-item menu-accordion {{ set_active([Request::is('dashboard/kepalasurat*'), Request::is('dashboard/tandatangan*'), Request::is('dashboard/suratkeluar*')], 'hover show') }}">
+                        class="menu-item menu-accordion {{ set_active([Request::is('dashboard/kepalasurat*'), Request::is('dashboard/tandatangan*'), Request::is('dashboard/suratkeluar*'), Request::is('dashboard/suratmasuk*')], 'hover show') }}">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -123,6 +123,23 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Tanda Tangan</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link {{ set_active(Request::is('dashboard/suratmasuk*')) }}"
+                                    href="{{ route('dashboard.suratmasuk.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Surat Masuk</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>

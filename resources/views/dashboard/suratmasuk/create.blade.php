@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
-@section('title', 'Surat Keluar')
-@section('page_title', 'Tambah Item Surat Keluar')
+@section('title', 'Surat Masuk')
+@section('page_title', 'Tambah Item Surat Masuk')
 @push('breadcrumbs')
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -9,7 +9,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted"><a class="text-muted text-hover-primary"
-            href="{{ route('dashboard.suratkeluar.index') }}">Surat Keluar</a></li>
+            href="{{ route('dashboard.suratmasuk.index') }}">Surat Masuk</a></li>
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item">
@@ -63,8 +63,8 @@
                         </div>
                     @endif
                     <!--begin::Form-->
-                    <form id="kt_form" class="form" action="{{ route('dashboard.suratkeluar.store') }}" method="POST"
-                        data-kt-redirect-url="{{ route('dashboard.suratkeluar.index') }}" enctype="multipart/form-data">
+                    <form id="kt_form" class="form" action="{{ route('dashboard.suratmasuk.store') }}" method="POST"
+                        data-kt-redirect-url="{{ route('dashboard.suratmasuk.index') }}" enctype="multipart/form-data">
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
@@ -133,13 +133,13 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Tujuan</label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Asal Surat</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="tujuan"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('tujuan') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Tujuan" />
+                                    <input type="text" name="asal_surat"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('asal_surat') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan asal surat" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -147,13 +147,27 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Isi Surat</label>
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Disp1</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="isi_surat"
-                                        class="form-control form-control-lg form-control-solid {{ $errors->has('isi_surat') ? 'is-invalid' : '' }}"
-                                        placeholder="Masukkan Isi Surat" />
+                                    <input type="text" name="disp1"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('disp1') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Disp1" />
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Disp2</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="disp2"
+                                        class="form-control form-control-lg form-control-solid {{ $errors->has('disp2') ? 'is-invalid' : '' }}"
+                                        placeholder="Masukkan Disp2" />
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -176,6 +190,56 @@
                                     </select>
                                 </div>
                                 <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-semibold fs-6 required">
+                                    File Surat
+                                </label>
+                                <!--end::Label-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true"
+                                        style="background-color: #eee">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px">
+                                            {{-- style="background-image: url(../assets/media/avatars/300-1.jpg)"> --}}
+                                        </div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                            title="Change image">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="image" value="{{ old('image') }}"
+                                                accept=".png, .jpg, .jpeg, .webp, webm" />
+                                            <input type="hidden" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                            title="Cancel image">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        {{-- <span
+                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                    title="Remove avatar">
+                                    <i class="bi bi-x fs-2"></i>
+                                </span> --}}
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                </div>
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -241,10 +305,10 @@
                             }
                         }
                     },
-                    'jabatan': {
+                    'asal_surat': {
                         validators: {
                             notEmpty: {
-                                message: 'Jabatan Tujuan tidak boleh kosong'
+                                message: 'Asal surat tidak boleh kosong'
                             }
                         }
                     },
